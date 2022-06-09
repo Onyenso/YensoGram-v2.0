@@ -1,0 +1,40 @@
+{% extends "yensogram/layout.html" %}
+
+{% load static %}
+
+{% block title %}Messages{% endblock %}
+<div id="top"></div>
+
+{% block badges %}{{ badges.badges }}{% endblock %}
+
+{% block main %}
+
+    <div class="row justify-content-center pt-5">
+        <div class="col-md-6">
+            <h3 class="mb-2"><a id="friend_username" href="{% url 'yg-account' friend.username %}">{{ friend.username }}</a></h3>
+
+                <div id="messages" class="">
+                    <p style="display: none;" id="no-conversation">No conversation yet</p>
+                </div>
+
+            <a href="#top" title="Back to top" class="material-icons google">north</a>
+
+            <form class="mb-2 p-1 fixed-bottom" id="message-form" method="post">
+                <div class="row justify-content-start">
+                    <div class="form-group col-9">
+                        <textarea style="border-radius: 15px;" required name="message" autofocus class="form-control"  rows="3" placeholder="Send a message to {{ friend.username }}" id="message"></textarea>
+                    </div>
+                    <div class="col-1">
+                        <input id="buttonm" value="Send" class="btn btn-primary" type="submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static '/yensogram/messages.js' %}"></script>
+
+{% endblock main %}
+
+
+

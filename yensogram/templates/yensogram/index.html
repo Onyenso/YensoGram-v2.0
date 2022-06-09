@@ -1,0 +1,164 @@
+{% extends "yensogram/layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+<div id="up"></div>
+
+{% block badges %}{{ badges.badges }}{% endblock %}
+
+{% block main %}
+
+    <!--Layout for xs screens-->
+    <div class="row justify-content-center d-block d-md-none">
+
+        <div class="col">
+
+            <nav class="mb-3">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Newsfeed</a>
+                <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Friends</a>
+                </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+
+                <!--Posts-->
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    {% for post in page_obj %}
+                        <article class="media content-section m">
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                    <img class="rounded-circle article-img" src="{{ post.author.image.url }}">
+                                    <a class="mr-2" href="{% url 'yg-account' post.author.username %}">{{ post.author.username }}</a>
+                                    <small class="text-muted">{{ post.date }}</small>
+                                </div>
+                                <p class="article-content"><a style="text-decoration: none; color: black" class="article-title" href="{% url 'yg-post' post.id %}">{{ post.content }}</a></p>
+                                {% if post.image %}
+                                    <div class="row justify-content-center">
+                                        <div>
+                                            <img style="border-radius: 10px;" src="{{ post.image.url }}">
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </article>
+                    {% empty %}
+                        <p style="text-align: center" class='text-muted mt-3'>You and your friends have no posts yet.</p>
+                    {% endfor %}
+                </div>
+                <!--Friend list-->
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="content-section-home">
+                        <p class='text-muted'>Users who accept your friend request will be shown here.
+                            {% for friend in friends %}
+                                <div>
+                                    <a class="friend_usernames" href="{% url 'yg-messages' friend.username %}">{{ friend.username }}</a><span id="{{ friend.username }}-xs" class="badge badge-light"></span>, your friend since {{ friend.time_accepted|date:"F d, Y" }}
+                                </div>
+
+                            {% empty %}
+                                <p style="font-size:large;">Ouch, you have no friends.</p>
+                                <div><a href="{% url 'yg-add' %}">Add Friend</a></div>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout for md screens-->
+    <div class="row justify-content-center d-none d-md-flex">
+
+        <div class="col-md-8">
+            <h3 style="text-align: center">Newsfeed</h3>
+
+            {% for post in page_obj %}
+                <article class="media content-section">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <img class="rounded-circle article-img" src="{{ post.author.image.url }}">
+                            <a class="mr-2" href="{% url 'yg-account' post.author.username %}">{{ post.author.username }}</a>
+                            <small class="text-muted">{{ post.date }}</small>
+                        </div>
+                        <p class="article-content"><a style="text-decoration: none; color:black" class="article-title" href="{% url 'yg-post' post.id %}">{{ post.content }}</a></p>
+                        {% if post.image %}
+                            <div class="row justify-content-center">
+                                <div>
+                                    <img style="border-radius: 10px;" src="{{ post.image.url }}">
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </article>
+            {% empty %}
+                <p style="text-align: center" class='text-muted'>You and your friends have no posts yet.</p>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+          <h3 style="text-align: center">Friends</h3>
+          <div class="content-section-home">
+            <p class='text-muted'>Users who accept your friend request will be shown here.
+            {% for friend in friends %}
+                <div>
+                    <a class="friend_usernames" href="{% url 'yg-messages' friend.username %}">{{ friend.username }}</a><span id="{{ friend.username }}-md" class="badge badge-light"></span>, your friend since {{ friend.time_accepted|date:"F d, Y" }}
+                </div>
+            {% empty %}
+                <p style="font-size:large;">Ouch, you have no friends.</p>
+
+                <div><a href="{% url 'yg-add' %}">Add Friend</a></div>
+            {% endfor %}
+            </p>
+          </div>
+        </div>
+    </div>
+
+
+    {% if page_obj %}
+    <div class="m-2">
+        {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+    </div>
+    {% endif %}
+
+
+   <script>
+       document.addEventListener("DOMContentLoaded", () => {
+           setInterval(() => load_latest(), 1000)
+       })
+
+
+       // Function for loading latest messages
+        function load_latest() {
+
+            document.querySelectorAll(".friend_usernames").forEach(friend_username => {
+                // Get messages
+                fetch(`/messages_count_API/${friend_username.innerHTML}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Insert into DOM for md and xs screens
+                    document.querySelector(`#${friend_username.innerHTML}-xs`).innerHTML = data.unread_messages
+                    document.querySelector(`#${friend_username.innerHTML}-md`).innerHTML = data.unread_messages
+                })
+            })
+        }
+
+   </script> 
+
+
+{% endblock %}

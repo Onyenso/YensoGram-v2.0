@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link rel="stylesheet" href="{% static 'yensogram/bootstrap.min.css' %}">
+        <!--Google css icons-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <link href="{% static 'yensogram/Ed, Edd and Eddy.jpg' %}" rel="icon">
+
+        <link href="{% static 'yensogram/styles.css' %}" rel="stylesheet">
+
+        <title>YensoGram2&reg; | {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-md navbar-light bg-light border sticky-top">
+            <a class="navbar-brand" href="{% url 'yg-index' %}">YensoGram&reg; <span style="font-size:large">{% if user.is_authenticated %}{{ user.username }}{% endif %}</span></a>
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item {% block active1 %}{% endblock %} material-icons" title="Add friend"><a class="nav-link" href="{% url 'yg-add' %}">person_add</a></li>
+                        <li class="nav-item {% block active2 %}{% endblock %}"><a class="nav-link" href="{% url 'yg-friend-requests' %}">Friend Requests<span class="badge badge-light">{% block badges %}{% endblock %}</span></a></li>
+                        <li class="nav-item {% block active3 %}{% endblock %}"><a class="nav-link" href="{% url 'yg-new-post' %}">New Post</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item {% block active4 %}{% endblock %} material-icons"><a class="nav-link" title="Account" href="{% url 'yg-account' user.username %}">account_circle</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'yg-logout' %}">Log Out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item {% block active5 %}{% endblock %}"><a class="nav-link" href="{% url 'yg-register' %}">Sign Up</a></li>
+                        <li class="nav-item {% block active6 %}{% endblock %}"><a class="nav-link" href="{% url 'yg-login' %}">Log In</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
+        <div class="row justify-content-center mt-2">
+            <div class="col-md-4">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} text-center alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <main id="main" class="container">
+                {% block main %}
+                {% endblock %}
+        </main>
+
+        <span id="footer" style="position: fixed; bottom: 1px" class="text-muted">&copy;2020 <a href="https://twitter.com/Yensodev" target="blank">Yensodev Software Solution&trade;</a>.</span>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    </body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

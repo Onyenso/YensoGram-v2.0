@@ -1,0 +1,70 @@
+{% extends "yensogram/layout.html" %}
+
+{% block title %}{{ post.content }}{% endblock %}
+
+{% block badges %}{{ badges.badges }}{% endblock %}
+
+{% block main %}
+
+
+    <div class="row justify-content-center pt-5">
+        <div class="col-md-8">
+
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <img class="rounded-circle article-img" src="{{ post.author.image.url }}">
+                        <a class="mr-2" href="{% url 'yg-account' post.author.username %}">{{ post.author.username }}</a>
+                        <small class="text-muted">{{ post.date }}</small>
+                        {% if post.author == request.user %}
+                            <div>
+                                <a class="btn btn-primary btn-sm m-1" href="#">Update</a>
+                                <button type="button" class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <p class="article-content">{{ post.content }}</p>
+                    {% if post.image %}
+                        <div class="row justify-content-center">
+                            <div>
+                                <img style="border-radius: 10px;" src="{{ post.image.url }}">
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </article>
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        <a class="btn btn-danger btn-sm m-1" href="#">Delete</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

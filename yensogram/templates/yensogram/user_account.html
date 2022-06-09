@@ -1,0 +1,127 @@
+{% extends "yensogram/layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Account{% endblock %}
+
+
+{% block active4 %}active{% endblock %}
+
+{% block badges %}{{ badges.badges }}{% endblock %}
+
+{% block main %}
+
+
+    <div class="row justify-content-center pt-5">
+        <div class="col-md-8">
+
+            <div  class="content-section">
+
+            <div class="media">
+                <img class="rounded-circle account-img d-none d-md-block" src="{{ details.image.url }}">
+                <img class="rounded-circle account-img-sm d-block d-md-none" src="{{ details.image.url }}">
+                <!-- For md devices -->
+                <div class="media-body d-none d-md-inline" style="margin-left: 130px">
+                    <h2 class="account-heading" style="color: black">{{ details.username }}</h2>
+                    <div class="text-secondary">{{ details.email }}</div>
+                </div>
+
+                <!-- For xs devices -->
+                <div class="media-body d-block d-md-none">
+                    <h5 class="account-heading" style="color: black">{{ details.username }}</h5>
+                    <div class="text-secondary">{{ details.email }}</div>
+                </div>
+            </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h4 style="color:black; text-align:left; margin-left: 10px">Account Info</h4>
+                        <div class="container"><hr style="background-color: black;"></div>
+                        <div>
+                            <h5 style="color: black">Bio</h5>
+                            <p style="color: black;">{{ details.bio }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Forms -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <!--This form is from UserCreationForm-->
+                    {{ form|crispy }}
+                </div>
+    
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+
+            <h5 style="color: black">Posts by {{ details.username }} ({{ total }})</h5>
+
+            {% for post in posts %}
+
+                <article class="media content-section" style="border-stlye: solid; border-color: black;">
+                      <div class="media-body">
+                        <div class="article-metadata">
+                          <img class="rounded-circle article-img" src="{{ post.author.image.url }}">
+                          <a class="mr-2" href="#">{{ details.username }}</a>
+                          <small class="text-muted">{{ post.date }}</small>
+                              <div>
+                                  <a class="btn btn-primary btn-sm m-1" href="#">Update</a>
+                                  <button type="button" class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                              </div>
+                        </div>
+                        <p class="article-content">{{ post.content }}</p>
+                        {% if post.image %}
+                            <div class="row justify-content-center">
+                                <div>
+                                    <img style="border-radius: 10px;" src="{{ post.image.url }}">
+                                </div>
+                            </div>
+                        {% endif %}
+                      </div>
+                    </article>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure you want to delete?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                            <a class="btn btn-danger btn-sm m-1" href="#">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                {% empty %}
+
+                <div>No posts</div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

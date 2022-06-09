@@ -1,0 +1,37 @@
+{% extends "yensogram/layout.html" %}
+
+{% block title %}Add Friend{% endblock %}
+
+{% block user %}{{ user.username }}{% endblock %}
+
+{% block active1 %}active{% endblock %}
+
+{% block badges %}{{ badges.badges }}{% endblock %}
+
+{% block main %}
+
+
+
+    <div class="row justify-content-center p-5">
+        <div class="col-md-4">
+            <form action="{% url 'yg-add' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Friend's Username" type="text" required>
+                    {% if message %}
+                    <small style="color: red;">{{ message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="row justify-content-center" >
+                    <div class="col-7 col-md-6">
+                        <button class="btn btn-primary" type="submit">Send Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}

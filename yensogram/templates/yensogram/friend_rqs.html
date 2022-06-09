@@ -1,0 +1,31 @@
+{% extends "yensogram/layout.html" %}
+
+{% block title %}Friend Requests{% endblock %}
+
+{% block user %}{{ user.username }}{% endblock %}
+
+{% block active2 %}active{% endblock %}
+
+{% block badges %}{{ badges.badges }}{% endblock %}
+
+{% block main %}
+
+    <div style="text-align: center; border-radius: 10px; border: 1px solid" class="row p-1 m-1">
+      
+        {% for friend in badges.rqs %}
+            <div class="col" style="font-size:large">
+               <a href="{% url 'yg-account' friend.username %}">{{ friend.username }}</a> on {{ friend.time_fr|date:"F d, Y" }}
+               <div class="d-inline-flex">
+                    <a href="{% url 'yg-friend-request-accept' friend.username %}" class="btn btn-sm btn-success">Accept</a> |
+                    <a href="{% url 'yg-friend-request-decline' friend.username %}" class="btn btn-sm btn-danger">Decline</a>
+                </div>    
+            </div>        
+        {% empty %}
+            <p style="font-size:large">You have no friend requests.</p>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+
+

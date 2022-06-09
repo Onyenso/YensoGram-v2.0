@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+import django_on_heroku
 from dotenv import load_dotenv, find_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,7 @@ SECRET_KEY = "^y^h01)4g=b@wmgs=83w7hj4552sou0#ur2jy+dgp8s&u-#2&i"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -153,3 +154,4 @@ LOGIN_URL = "yg-login"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+django_on_heroku.settings(locals(), staticfiles=False)

@@ -7,4 +7,4 @@ DEBUG = False
 ALLOWED_HOSTS = ["yensogram-v2.0.herokuapp.com"]
 
 django_on_heroku.settings(locals(), staticfiles=False)
-del DATABASES["default"]["OPTIONS"]["sslnode"]
+del DATABASES["default"]["OPTIONS"]["sslnode"] # optional

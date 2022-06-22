@@ -4,7 +4,7 @@ An updated version of <a href="https://github.com/Onyenso/YensoGram" target="bla
 
 ## Project Description
 
-Unilke its previous version, it allows the ability to send messages instantly. The greatest challenge was making it possible for any message to appear immediately on an other user's browser. This was made possible with the JavaScript found in <a href="https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/yensogram/static/yensogram/messages.js">messages.js</a>. Also, posts can now contain pictures.
+Unilke its previous version, it allows the ability to send messages instantly. The greatest challenge was making it possible for any message to appear immediately on an other user's browser. This was made possible with the JavaScript found in <a href="https://github.com/Onyenso/YensoGram-v2.0/blob/master/yensogram/static/yensogram/messages.js">messages.js</a>. Also, posts can now contain pictures.
 
 When a new user signs up, the user will have no friends and thus no posts to be seen. The application allows the user to find other users by sending them friend requests. The user is allowed the ability to accept and decline any friend request. When the user makes a post, it will be visible to other users who are friends with him/her and vice versa.
 
@@ -13,15 +13,15 @@ I did this project because I had already done a previous version of it for the [
 
 In this project,
 
-- [yensogram-v2.0](https://github.com/Onyenso/YensoGram-v2.0/tree/main/yensogram-v2.0) is the folder that holds the entire project.
-- [yensogram-v2.0/db.sqlite3](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/db.sqlite3) is the database for the project.
-- [yensogram-v2.0/media](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/media) is the folder that holds uploaded media from users.
-- [yensogram-v2.0/static](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/static) holds the static files for the project.
-- [yensogram-v2.0/yensogram/templates/yensogram](https://github.com/Onyenso/YensoGram-v2.0/tree/main/yensogram-v2.0/yensogram/templates/yensogram) holds frontend HTML files.
-- [yensogram-v2.0/yensogram/forms.py](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/yensogram/forms.py) hold the forms used in the application.
-- [yensogram-v2.0/yensogram/models.py](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/yensogram/models.py) hold the models used in the application.
-- [yensogram-v2.0/yensogram/urls.py](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/yensogram/urls.py) are the urls for the application.
-- [yensogram-v2.0/yensogram/views.py](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/yensogram/views.py) hold the functions used to process requests to the urls.
+- [db.sqlite3](https://github.com/Onyenso/YensoGram-v2.0/blob/master/db.sqlite3) is the database for the project.
+- [final_project/setiings.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/final_project/settings.py) contains settings for the project.
+- [/media](https://github.com/Onyenso/YensoGram-v2.0/blob/master/media) is the folder that holds uploaded media from users.
+- [/static](https://github.com/Onyenso/YensoGram-v2.0/blob/master/static) holds the static files for the project.
+- [/yensogram/templates/yensogram](https://github.com/Onyenso/YensoGram-v2.0/tree/master/yensogram/templates/yensogram) holds frontend HTML files.
+- [/yensogram/forms.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/yensogram/forms.py) hold the forms used in the application.
+- [/yensogram/models.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/yensogram/models.py) hold the models used in the application.
+- [/yensogram/urls.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/yensogram/urls.py) are the urls for the application.
+- [/yensogram/views.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/yensogram/views.py) hold the functions used to process requests to the urls.
 
 ## What's New
 - Intuitive form error feedback on registration and login
@@ -38,8 +38,15 @@ In this project,
 ```
 $  python manage.py runserver
 ```
+
+## Hosted URL
+- https://yensogram.herokuapp.com
+
 ## Video demonstration
 - https://www.youtube.com/watch?v=BiTGvADB9cs
+
+## Side Note
+- I intentionally left `DEBUG = True` in my [settings.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/final_project/settings.py) file. I wouldn't do this in a real world project.
 
 ## Creator
 

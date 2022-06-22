@@ -13,7 +13,6 @@ I did this project because I had already done a previous version of it for the [
 
 In this project,
 
-- [db.sqlite3](https://github.com/Onyenso/YensoGram-v2.0/blob/master/db.sqlite3) is the database for the project.
 - [final_project/setiings.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/final_project/settings.py) contains settings for the project.
 - [/media](https://github.com/Onyenso/YensoGram-v2.0/blob/master/media) is the folder that holds uploaded media from users.
 - [/static](https://github.com/Onyenso/YensoGram-v2.0/blob/master/static) holds the static files for the project.
@@ -32,8 +31,8 @@ In this project,
 ## Usage
 
 - Install Python and Django.
-- Install the Python packages in the [requirements.txt](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/requirements.txt) file using pip install.
-- In your terminal or command line, navigate to the folder where [yensogram-v2.0/manage.py](https://github.com/Onyenso/YensoGram-v2.0/blob/main/yensogram-v2.0/manage.py) lives.
+- Install the Python packages in the [requirements.txt](https://github.com/Onyenso/YensoGram-v2.0/blob/master/requirements.txt) file using pip install.
+- In your terminal or command line, navigate to the folder where [yensogram-v2.0/manage.py](https://github.com/Onyenso/YensoGram-v2.0/blob/master/manage.py) lives.
 - Then, you can run the program by running:
 ```
 $  python manage.py runserver
